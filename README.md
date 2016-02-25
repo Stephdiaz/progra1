@@ -1,0 +1,19 @@
+# progra1
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+void main()
+{
+	int a;
+	cout<<"Hola Mundo:	";
+	cin>>a;
+	cout<<"adios:  ";
+	
+	
+
+	getch();
+
+
+}
