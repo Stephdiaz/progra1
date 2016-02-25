@@ -9,7 +9,7 @@ void main()
 	int a;
 	cout<<"Hola Mundo:	";
 	cin>>a;
-	cout<<"adios:  ";
+	cout<<"adios mundo:  ";
 	
 	
 
