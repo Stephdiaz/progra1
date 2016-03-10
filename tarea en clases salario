@@ -1,0 +1,18 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+namespace std;
+void ()
+
+{
+	float h,p,s;
+	cout << "Introducir nombre ";
+	cin >> a;
+	cout << "Introducir horas trabajadas al mes ";
+	cin >> h;
+	p = 20;
+	s = (h*p)-((h*p)*0.13);
+	cout << "el salario de " << a << " es; " << s << endl;
+	getch ();
+}
