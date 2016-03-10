@@ -10,9 +10,13 @@ void main ()
 
 {
 	float a,b,area;
+	cout<< "Introducir base ";
 	cin>>a;
+	cout<< "Introducir altura ";
 	cin>>b;
 	area=(a*b)/2;
 	cout<< "El area es: "<<area;
+
 	getch();
 }
+
