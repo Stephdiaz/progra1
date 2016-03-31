@@ -1,0 +1,26 @@
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#define IVA 0.13
+#define AFP 0.1271
+using namespace std;
+void main ()
+{
+	int a,i;
+	float sb,sn;
+	cout<<"ingresar numero de empleados"<<endl;
+	cin>>a;
+	for (i=1;i<=a;i++)
+	{
+		cout<<"Ingresar salario bruto"<<endl;
+		cin>>sb;
+		if (sb>=7000)
+		sn=sb-(IVA+AFP)*sb;
+		else
+		sn=sb-(AFP*sb);
+		cout<<"El salario neto es:"<<endl;
+		cout<<sn<<endl;
+	
+	}
+	getch ();
+}
