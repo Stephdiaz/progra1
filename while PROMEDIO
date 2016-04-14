@@ -1,0 +1,45 @@
+# progra1
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "stdlib.h"
+
+using namespace std;
+
+void main()
+
+
+{
+	float NP,P1,P2,P3,EF,Promedio,NF;
+	int NR,i;	Promedio=0;
+	i=0;
+	
+	cout<<"BIENVENIDO USUARIO"<<endl;
+	cout<<"INGRESE EL NUMERO DE ESTUDIANTES"<<endl;
+	cin>>NR;
+
+	while (i<NR)
+	
+	 {
+		cout<<"INGRESE LA NOTA PRACTICA: "<<endl;
+		cin>>NP;
+		cout<<"INGRESE LA NOTA DEL PRIMER PARCIAL: "<<endl;
+		cin>>P1;
+        cout<<"INGRESE LA NOTA DEL SEGUNDO PARCIAL: "<<endl;
+		cin>>P2;
+        cout<<"INGRESE LA NOTA DEL TERCER PARCIAL: "<<endl;
+		cin>>P3;
+		cout<<"INGRESE LA NOTA DEL EXAMEN FINAL: "<<endl;
+		cin>>EF;
+		NF=(NP*0.2)+(((P1+P2+P3)/3)*0.40)+(EF*0.40);
+		cout<<"La nota final del estudiante es"<<endl;
+		cout<<NF<<endl;
+		Promedio=Promedio+NF;
+        i++;
+	
+	  }
+
+	cout<< "EL PROMEDIO FINAL ES: "<<endl;
+	cout<<Promedio/i;
+	getch();
+}
