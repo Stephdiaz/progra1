@@ -1,0 +1,31 @@
+# progra1
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "stdlib.h"
+
+using namespace std;
+
+void main()
+
+{
+	int i,n,p;
+	p=1;
+	i=1;
+	do{
+	cout<<"Bienvenidos"<<endl;
+	cout<<"ingreso numero para sacar el factorial"<<endl;
+	cin>>n;
+	} while (n<0);
+	
+	while (i<=n)
+	{
+		p=p*i;
+		i++;
+	}
+		cout<<"El factorial de "<<n;
+		cout<<" es "<<endl;
+		cout<<p;
+
+		getch();
+		}
