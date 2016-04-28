@@ -9,11 +9,13 @@ void main ()
 {
 	int x,n,i;
 	float s;
+        s=8;
 	cout<<"intruducir valor de x"<<endl;
 	cin>>x;
 	cout<<"intruducir valor de n"<<endl;
 	cin>>n;
 	for (i=1;i<=n;i++)
-		s= (pow(x,i)%(1+i))+s;
-	cout <<s;
+		s=s+pow (x,i)/(i+1);
+cout<<"la suma es ";
+cout <<s;
 }
