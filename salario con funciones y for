@@ -1,0 +1,31 @@
+# progra1
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+float salario (float h, float c);
+void main ()
+{
+	int i,m;
+	float h,c,tt;
+	cout<<"ingrese cantidad de trabajadores"<<endl;
+	cin>>m;
+	for(i=10;i<=m;i++)
+	{
+	cout<<"ingrese horas trbajadas"<<endl;
+	cin>>h;
+	cout<<"ingrese costo de hora"<<endl;
+	cin>>c;
+	tt=salario(h,c);
+		cout<<"el sueldo es "<<endl;
+		cout<<tt<<endl;
+	}
+		getch();
+}
+float salario (float h, float c)
+{
+	float st;
+		st=h*c;
+	return st;
+}
