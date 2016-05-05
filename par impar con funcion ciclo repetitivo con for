@@ -1,0 +1,33 @@
+# progra1
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+bool num_par (int n);
+void main ()
+{
+	int numero,m,i;
+	bool z;
+	cout<<"ingrese cantidad de numeros"<<endl;
+	cin>>m;
+	for(i=1;i<=m;i++)
+	{cout<<"introducir numero para calcular si es par o impar"<<endl;
+	cin>>numero;
+	z=num_par(numero);
+	if (z)
+		cout<<"es par"<<endl;
+	else
+		cout<<"es impar"<<endl;
+	}
+getch ();	
+}
+bool num_par (int n)
+{
+	bool s;
+	if (n%2==0)
+	s=true;
+	else
+	s=false;
+	return s;
+}
