@@ -1,0 +1,104 @@
+# progra1
+#include "stdafx.h"
+#include <iostream>
+#include "stdlib.h"
+#include "conio.h"
+using namespace std;
+float area_cuad(float lado);
+float poten_num(float numero, int potencia);
+int MCD_num(int primer, int segundo);
+
+
+void main ()
+{
+	int op,p,R,a,b;
+	float l,n,r,s;
+	do 
+	{
+		cout<<"Elegir opcion"<<endl;
+		cout<<"1.Area"<<endl;
+		cout<<"2. potencia"<<endl;
+		cout<<"3. MCD"<<endl;
+		cout<<"4. Salir"<<endl;
+		cin>>op;
+		system ("color 9A");
+		switch (op)
+		{
+			case 1:
+		{
+			cout<<"Ingrese lado del cuadrado"<<endl;
+			cin>>l;
+			r= area_cuad (l);
+				cout<<"El area es "<<r<<endl;
+			break;
+		}
+			case 2:
+		{
+			cout<<"ingrese numero"<<endl;
+			cin>>n;
+			cout<<"ingrese potencia"<<endl;
+			cin>>p;
+			s= poten_num(n,p);
+			cout<<"la respuesta es "<<s<<endl;
+			break;
+		}	
+			case 3:
+		{
+			cout<<"ingrese primer numero"<<endl;
+			cin>>a;
+			cout<<"ingrese segundo numero"<<endl;
+			cin>>b;
+			R=MCD_num (a,b);
+			cout<<"La respuesta es "<<R<<endl;
+			break;
+		}
+			case 4:
+			{
+			cout<<"salir"<<endl;
+			break;
+			}	
+			default:
+				system ("cls");
+				cout<<"opcion invalidad"<<endl;
+	} 
+	}while (op>0);
+	
+		getch ();
+	}
+	
+
+float area_cuad (float l)
+{
+	float r=l*l;
+	return r;
+}
+
+float poten_num(float n,int p)
+{
+	int i;
+	float r=n;
+	for(i=1;1<=p;i++)
+	{
+		 r=r*i;
+	}
+	return r;
+}
+int MCD_num(int a, int b)
+{
+	int s,i;
+	if (a>=b)
+	{
+		s=a;
+		i=b;
+	}
+	else
+	{
+	s=b;
+	i=a;
+	}
+	while ((s%i!=0)&&(i%i!=0))
+	{
+		i--;
+	}
+	return i;
+	}
