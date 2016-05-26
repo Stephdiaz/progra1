@@ -1,0 +1,60 @@
+# progra1
+#include "stadfx.h"
+#include <iostream>
+#include "conio.h"
+#define max 100
+using namespace std;
+void cargar (double a[], int tam);
+void mostrar (double a[], int tam);
+double promedio (double a[], int tam);
+void burbuja (double a[], int tam);
+void main ()
+{
+int n;
+double prom;
+double notas [max];
+do{
+cout<<"ingrese el numero de elementos"<<endl;
+cin>>n;
+}while (n>100 || n<=0);
+cargar (notas,n);
+burbuja (notas,n);
+mostrar (notas,n);
+prom=promedio (notas,n);
+cout<<"el promedio es"<<prom<<endl;
+getch ();
+}
+void cargar (double a[], int tam)
+{
+for (int i=0;i<tam;i++)
+{
+cout<<"v["<<i<<"]="<<endl;
+cin>>[i];
+}
+}
+void mostrar (double a[], int tam)
+{
+for (int i=0;i<tam;i++)
+{
+cout<<"v["<<i<<"]="<<a[i]<<endl;
+}
+}
+double promedio (double a[], int tam)
+{
+double n=0;
+for (int i=0;i<tam;i++)
+{
+n=n+a[i];
+}
+return n/tam;
+}
+void burbuja (double a[], int tam)
+{
+for (int i=0;i<tam;i++)
+for (int j=i+1;j<tam;j++)
+if (a[i]>a[j])
+{ int temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+}
+}
