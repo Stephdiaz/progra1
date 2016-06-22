@@ -1,0 +1,45 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define max 300
+using namespace std;
+float funcion(float a[],float b[],float c[],int n,int t);
+void main()
+{
+	int n,t;
+	float a[max], b[max],c[max];
+	cout<<"Ingrese cantidad de elementos del primer vector"<<endl;
+	cin>>n;
+	cout<<"Ingrese cantidad de elementos del segundo vector"<<endl;
+	cin>>t;
+	funcion(a,b,c,n,t);
+	getch();
+}
+
+
+float funcion(float a[],float b[],float c[],int n,int t)
+{
+	cout<<"ingrese valores del primer vector"<<endl;
+	for (int i=0;i<n;i++)
+{	cin>>a[i];
+}cout<<"ingrese valores del segundo vector"<<endl;
+	for (int i=0;i<t;i++)
+{	cin>>b[i];
+}
+	int i=0;
+	for (int j=0;j<n;j++)
+		
+{		c[j]=a[i];
+	i++;
+}
+	i=0;
+		for (int j=n;j<n+t;j++)
+		{
+		c[j]=b[i];
+	i++;
+		}
+		for(i=0;i<n+t;i++)
+		cout<<c[i] << " ";
+		
+	return 0;
+}# progra1
