@@ -1,0 +1,68 @@
+# progra1}
+#include <iostream>
+#include "conio.h"
+void impares(int n);
+bool verdadofalsoprimo(int n);
+void primos(int n);
+using namespace std;
+void main ()
+{	int n;
+	cout<<"Cantidad de numeros a mostrar=	"<<endl;
+	cin>>n;
+	
+	primos(n);
+	getch ();
+}
+
+void impares(int n)		//nuestra los primeros numeros impares
+	{int i,imp=1;
+
+for (i=0;i<n;i++)
+	{	
+		cout<<imp<<"	";
+		imp=imp+2;
+}
+}
+void primos(int n)
+{
+	int i=1,primo=1,j;
+	for (j=0;j<n;j++)	
+		{while (verdadofalsoprimo(i)==false)
+		{i++;}
+	cout<<i<<" ";	
+	i++;
+	}
+		
+
+}
+
+bool verdadofalsoprimo(int n)
+		{	int i;
+		bool k=true;
+		for(i=2;i<n;i++){
+			if(n%i==0){
+				k=false;
+			}
+		}
+		return k;
+}
+
+void mostrarimparprimopar(int n)
+{
+	int i,imp=1,par=2,primo=1,k=0,elem;
+	for(i=1;i<n;i++)
+	{
+	ig(K==0){
+		else=imp:
+		imp=imp+2;
+		k=1;
+	}else{
+		if(k==1){
+			elem=obtensionnumeroproimo(primo);
+			primo++;
+			k=2;
+		}else{
+			elem=par;
+			par=par+2;
+			k=0;
+		}}
