@@ -1,0 +1,92 @@
+# progra1
+#include <iostream>
+#include "conio.h"
+#define max 25
+void cargar(int a[],int num);
+void mostrar(int a[],int num);
+void eliminar(int a[],int &num);
+bool verificarprimo(int n);
+void cargarprimo(int a[],int num);
+void intercalarprimo(int a[],int num);
+using namespace std;
+void main ()
+{	int num, a[max];
+cout<<"Introducir capacidad del vector"<<endl;
+cin>>num;
+cargarprimo(a,num);
+mostrar(a,num);
+getch ();
+}
+void cargar(int a[],int num)
+	{
+		cout<<"cargue su vector"<<endl;
+			for (int i=0;i<num;i++)
+			{
+				cin>>a[i];
+			}
+	}
+void mostrar(int a[],int num)
+	{
+			for (int i=0;i<num;i++)
+			{
+				cout<<"v["<<i<<"]: "<<a[i]<<endl;
+			}
+	}
+void eliminar(int a[],int &num)
+{ int i,k;
+	for (int i=0;i<num;i++)
+	{
+		if (verificarprimo(a[i]) == true)
+		{
+			for(int j=1;j<num-1;j++){
+				a[j]=a[j+1];
+		}
+		--num;--i;
+	}
+	}
+}
+bool verificarprimo(int n)
+{
+	bool h=true;
+	for (int i=2; i<n;i++){
+		if (n%i==0){
+			h=false;
+		}
+	}
+	return (h);
+}
+
+void cargarprimo(int a[],int num) //cargar primos de modo intercalado
+{int k=0,j=2;
+	a[0]=1;
+
+	for(int i=1;i<num;i++){
+	k++;
+		do{k++;}
+		while(k%j==0);
+			
+			a[i]=k;
+	}
+}
+void intercalarprimo(int a[],int num)
+{	int aux,j=0;
+	cargarprimo(a,num);
+	for(int i=1;i<num;i++)
+	{	
+		aux=a[i];
+		a[num-j]=aux;
+		a[i]=a[i+1];
+		j++;
+	}
+}
+
+void burbuja (double a[], int tam)
+{
+for (int i=0;i<tam;i++)
+for (int j=i+1;j<tam;j++)
+if (a[i]>a[j])
+{ int temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+}
+}
