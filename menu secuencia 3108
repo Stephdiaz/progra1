@@ -1,0 +1,63 @@
+# progra1
+
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+void multiplosdetres (int a);
+void cuadrado(int a);
+using namespace std;
+
+void main ()
+{ int op,a;
+		do{
+		cout<<".............MENU................"<<endl;
+		cout<<"1.multipos de 3"<<endl;
+		cout<<"2.los primeros cuadrados numeros invertidos"<<endl;
+		cout<<"3.invertir su numero"<<endl;
+		cout<<"4.eliminar digito mayor"<<endl;
+		cout<<"Salir"<<endl;
+		cin>>op;
+		}while ((op<0)&&(op>11));
+	switch (op)
+	{
+	case 1:	{cout<<"Introducir cantidad de digitos"<<endl;
+			cin>>a;
+			multiplosdetres (a);
+			}break;
+	case 2:	{cout<<"Introducir cantidad de digitos"<<endl;
+			cin>>a;
+			cuadrado(a);
+			}break;
+	}
+	getch ();
+}
+
+
+
+void multiplosdetres (int a)
+{ int r;
+	for (int i=1;i<=a;i++)
+	{    r=3*i;
+		cout<<r<<"  ";
+	}
+}
+
+void cuadrado(int a)
+{
+	int r,j,z=0;
+	for (int i=1;i<=a;i++)
+	{    r=i*i;
+	if(r>10){
+		while (r>0)
+		{
+			j=r%10;
+			z=(z*10)+j;
+			r=r/10;
+	}
+	r=z;
+	z=0;
+	}
+		cout<<r<<endl;
+	}
+}
