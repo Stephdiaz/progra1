@@ -1,9 +1,9 @@
-# 
 #include "stdafx.h"
 #include <iostream>
 #include "conio.h"
 #include "math.h"
 #include <stdio.h>
+#define max 1000
 int concatenarnumeros(int a, int b);
 int depurarepetidos(int a);
 int invertir(int a);
@@ -12,7 +12,7 @@ bool capicua(int a);
 float salario (float a, float b);
 void salarios(float a);
 int sumadigitos (int a);
-
+void automorficos();
 using namespace std;
 void main ()
 {int op,a,b,r;
@@ -63,6 +63,8 @@ bool R;
 			cin>>a;
 			r=sumadigitos(a);
 			cout<<"La respuesta es "<<r;
+			}break;
+	case 10:{ automorficos();
 			}break;
 }
 	getch();
@@ -158,5 +160,22 @@ int sumadigitos (int a)
 	a=a/10;}
 	return h;
 }
-
-			
+void automorficos ()
+{	int r=1,aux,h=1,c=0;
+	aux=h;
+	float a=2;
+	for (h=1;h<=25;h++){
+	if (h<10){
+		c=10;
+		r= pow(h,a);
+	if (r%c==h){
+		cout<<r<<" ";}}
+	else if	(h>9){
+			c=100;
+		r= pow(h,a);
+	if (r%c==h){
+		cout<<r<<" ";
+		}
+		}
+	}
+}
