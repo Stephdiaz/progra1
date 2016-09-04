@@ -1,3 +1,26 @@
+#include "stdafx.h"
+#include <iostream>
+#include <map>
+#include <ctime>
+#include <cstring>
+#include <cstdio>
+#include "math.h"
+const int MAXN = 10000;
+typedef unsigned long long i64;
+int digitos (i64 a) { return i64( log10( float(a) ) ) + 1; }
+void invertirCadena(char v[]);
+bool palindrome(char v[]);
+int minusculas(char v[]);
+int mayusculas(char v[]);
+int frecuenciaCadena(char v[], char a);
+int charToInt(char a);
+void convertirminuscula(char v[]);
+int charToInt(char a);
+char intToChar(int a);
+void convertirBase(char v[], i64 a, int b);
+void cambiarbase(char v[], float b, int o);
+void numeroliteral(char v[], int n);
+int valordelmensaje(char v[]);
 using namespace std;
 void main ()
 { int op, a, b, c;
