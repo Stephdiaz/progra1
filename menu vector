@@ -1,0 +1,195 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define max 50
+void cargar(int a[],int num);
+void frecuencia(int a[],int num);
+void eliminar(int a[],int num);
+void secuencia(int a[],int num);
+void sumarvectores(int a[],int b[],int num);
+void recorrerarriba(int a[],int num);
+void recorrerabajo(int a[],int num);
+void unionvec(int a[],int b[],int c[],int na, int nb, int nc);
+bool verificar(int c[], int num,int elem);
+using namespace std;
+void main ()
+{ int op,num,a[max],r,b[max],na,nb,c[max],nc;
+	do{
+		cout<<"..................MENU..............."<<endl;
+		cout<<"1.frecuencia en un vector"<<endl;
+		cout<<"2.insertar de manera ordenada"<<endl;
+		cout<<"3.eliminar numero de un vector"<<endl;
+		cout<<"4.busqueda secuencial"<<endl;
+		cout<<"5.sumar vectores"<<endl;
+		cout<<"6.recorrer hacia arriba"<<endl;
+		cout<<"7.recorrer hacia abajo"<<endl;
+		cout<<"8.union de vectores"<<endl;
+		cout<<"11.salir"<<endl;
+		cin>>op;
+	}while ((op<=0)||(op>11));
+switch (op){
+case 1: {cout<<"ingrese cantidad de digitos"<<endl;
+		cin>>num;
+		cout<<"Cargar vector"<<endl;
+		cargar(a,num);
+		frecuencia(a,num);}break;
+case 3: {cout<<"ingrese cantidad de digitos"<<endl;
+		cin>>num;
+		cout<<"Cargar vector"<<endl;
+		cargar(a,num);
+		eliminar(a,num);}break;
+case 4: {cout<<"ingrese cantidad de digitos"<<endl;
+		cin>>num;
+		cout<<"Cargar vector"<<endl;
+		cargar(a,num);
+		secuencia(a,num);}break;
+case 5: {cout<<"ingrese cantidad de digitos"<<endl;
+		cin>>num;
+		cout<<"Cargar primer vector"<<endl;
+		cargar(a,num);
+		cout<<"Cargar segundo vector"<<endl;
+		cargar(b,num);
+		sumarvectores(a,b,num);}break;
+case 6: {cout<<"ingrese cantidad de digitos"<<endl;
+		cin>>num;
+		cout<<"Cargar vector"<<endl;
+		cargar(a,num);
+		recorrerarriba(a,num);}break;
+case 7: {cout<<"ingrese cantidad de digitos"<<endl;
+		cin>>num;
+		cout<<"Cargar vector"<<endl;
+		cargar(a,num);
+		recorrerabajo(a,num);}break;
+case 8: {cout<<"ingrese cantidad de digitos del primer vector"<<endl;
+		cin>>na;
+		cout<<"Cargar primer vector"<<endl;
+		cargar(a,na);
+		cout<<"ingrese cantidad de digitos del primer vector"<<endl;
+		cin>>nb;
+		cout<<"Cargar segundo vector"<<endl;
+		cargar(b,nb);
+		unionvec(a,b,c,na,nb,nc);}break;
+}getch();
+}
+
+
+
+	void cargar(int a[],int num)
+	{
+		cout<<"Introducir valores"<<endl;
+		for (int i=0;i<num;i++)
+		{ 
+		cin>>a[i];}
+	}
+
+	void frecuencia(int a[],int num)
+	{	int	c,j, i ,acum=0;
+	cout<<"Ingrese numero que desea ver su frecuencia"<<endl;
+	cin>>c;
+	for (i=0;i<num;i++){
+		if(c==a[i]){
+			acum ++;}
+	}
+			
+		cout<<"el numero "<<c<<" se repite "<<acum<<" veces "<<endl;
+	}
+	
+	void eliminar(int a[],int num)
+	{ int c,i,aux=0,b[max];
+		cout<<"Ingrese numero que desea eliminar"<<endl;
+		cin>>c;
+		for (i=0;i<num;i++){
+		if(a[i]!=c){
+			b[aux]=a[i];
+			aux++;}
+		}cout<<"El nuevo vector es"<<endl;
+		for(i=0;i<aux;i++)
+		{
+			cout<<b[i]<<" ";}
+	}
+
+	void secuencia(int a[],int num)
+	{ int i,c;bool k=true;
+	cout<<"Ingrese numero que desea ubicar"<<endl;
+		cin>>c;
+		for (i=0;i<num;i++){
+		if(a[i]==c){
+			k=false;
+			cout<<"la ubicacion se encuentra en el vector numero "<<i;
+		}}
+		if (k==true)
+			cout<<"no se encuentra el numero "<<"-1";
+		
+	}
+
+	void sumarvectores(int a[],int b[],int num)
+	{
+		int c[max],i,aux;
+		for (i=0;i<num;i++)
+		{
+			c[i]=a[i]+b[num-i-1];
+			
+		}
+	for (i=0;i<num/2;i++)
+		{
+			aux=c[i];
+			c[i]=c[num-1-i];
+			c[num-1-i]=aux;
+		}
+		for (i=0;i<num;i++)
+		{
+			cout<<c[i]<<" ";
+		}
+	}
+	void recorrerarriba(int a[],int num)
+	{int i,b[max];
+		b[num-1]=a[0];
+		for (i=1;i<num;i++)
+		{b[i-1]=a[i];}
+		for (i=0;i<num;i++){
+			cout<<b[i]<<" ";
+		}
+	}
+	void recorrerabajo(int a[],int num)
+	{int i,b[max];
+		b[0]=a[num-1];
+		for (i=0;i<num;i++)
+		{b[i+1]=a[i];}
+		for (i=0;i<num;i++){
+			cout<<b[i]<<" ";
+		}
+	}
+	/*void uniondevectores(int a[],int b[],int numa,int numb)
+	{
+		int i,c[max],j=0;
+		for (i=0;i<numa;i++)
+		{	c[i]=a[i]; }
+		for (i=numa;i<numa+numb;i++)
+		{	c[i]=b[j]; 
+		j++;}
+		for (i=0;i<numa+numb;i++){
+			cout<<c[i]<<" ";
+		}
+	}
+	*/
+	bool verificar(int c[], int num,int elem)
+	{
+		int i;
+		bool k=false;
+		for(i=0;i<num;i++){
+			if(c[i]==elem)
+			{k=true;}
+	} return k;
+	}
+
+void unionvec(int a[],int b[],int c[],int na, int nb, int nc)
+{
+	int i;
+	nc=0;
+	for(i=0;i<na<i++;){
+		if(verificar(c,nc,a[i])==true)
+			c[nc]=a[i];
+		nc++;
+	}
+}
