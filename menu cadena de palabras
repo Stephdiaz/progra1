@@ -1,0 +1,276 @@
+using namespace std;
+void main ()
+{ int op, a, b, c;
+    char d;
+    char s[MAXN];
+	do{cout<<"----------------MENU------------------"<<endl;
+	cout<<"1.invertir la cadena"<<endl;
+	cout<<"2.palidromo"<<endl;
+	cout<<"3.cantidad de minuscula"<<endl;
+	cout<<"4.cantidad de mayuscula"<<endl;
+	cout<<"5.caracteres repetidos"<<endl;
+	cout<<"6.convertir a minuscula"<<endl;
+	cout<<"7.cambio de base"<<endl;
+	cout<<"8.numero literal"<<endl;
+	cout<<"9.costo del mensaje"<<endl;
+	cout<<"10.salir"<<endl;
+	cin>>op;}while ((op<0)||(op>10));
+	switch(op){
+			case 1:
+                cout << "Ingrese una cadena de texto" << endl;
+                gets(s);
+                invertirCadena(s);
+                cout << "La cadena invertida es: " << s << endl;
+                break;
+            case 2:
+                cout << "Ingrese una cadena de texto" << endl;
+                gets(s);
+                if (palindrome(s)) cout << "Es palindrome" << endl;
+                else cout << "No es palindrome" << endl;
+                break;
+            case 3:
+                cout << "Ingrese una cadena de texto" << endl;
+                gets(s);
+                cout << "La cantidad de minusculas son: " << minusculas(s) << endl;
+                break;
+            case 4:
+                cout << "Ingrese una cadena de texto" << endl;
+                gets(s);
+                cout << "La cantidad de mayusculas son: " << mayusculas(s) << endl;
+                break;
+            case 5:
+                cout << "Ingrese una cadena de texto" << endl;
+                gets(s);
+                cout << "Ingrese caracter a verificar frecuencia" << endl;
+                cin >> d;
+                cout << "La cantidad de veces que se repite el digito es: " << frecuenciaCadena(s, d) << endl;
+                break;
+            case 6:
+                cout << "Ingrese una cadena de texto" << endl;
+                gets(s);
+                convertirminuscula(s);
+                cout << "La cadena en minusculas es: " << s << endl;
+                break;
+            case 7:
+                cout << "Ingrese un numero que sea de base entre 2 al 35" << endl;
+                gets(s);
+                cout << "Especifique su base numerica" << endl;
+                cin >> a;
+                cout << "Ingrese a que base desea convertir" << endl;
+                cin >> b;
+                cambiarbase(s, a, b);
+                cout << "El numero en la nueva base es: " << s << endl;
+                break;
+            case 8:
+                cout << "Ingrese un numero entre el 1 y el 10.000" << endl;
+                cin >> a;
+                numeroliteral(s, a);
+                cout << "El numero en literal es: " << s << endl;
+                break;
+            case 9:
+                cout << "Ingrese una cadena de texto" << endl;
+                gets(s);
+                cout << "El costo de enviar la carta es: " << valordelmensaje(s) << endl;
+                break;
+			case 10:
+				cout<<"salir";
+				break;
+				default:
+                cout << "Opcion invalida" << endl;
+                break;
+	}
+}
+
+void invertirCadena(char v[])
+{
+    int aux, n = strlen(v);
+    for (int i = 0; i < n/2; ++i)
+    {
+        swap(v[i], v[n-i-1]);
+    }
+}
+ 
+bool palindrome(char v[])
+{
+    char aux[MAXN];
+    strcpy(aux, v);
+    invertirCadena(aux);
+    if (strcmp(v, aux) == 0) return true;
+    else return false;
+}
+ 
+int minusculas(char v[])
+{
+    int res = 0;
+    for (int i = 0; i < strlen(v); ++i)
+    {
+        if (islower(v[i])) ++res;
+    }
+    return res;
+}
+ 
+int mayusculas(char v[])
+{
+    int res = 0;
+    for (int i = 0; i < strlen(v); ++i)
+    {
+        if (isupper(v[i])) ++res;
+    }
+    return res;
+}
+ 
+int frecuenciaCadena(char v[], char a)
+{
+    int freq = 0;
+    for (int i = 0; i < strlen(v); ++i)
+        if (v[i] == a) ++freq;
+    return freq;
+}
+ 
+void convertirminuscula(char v[])
+{
+    for (int i = 0; i < strlen(v); ++i)
+        v[i] = tolower(v[i]);
+}
+ 
+int charToInt(char a)
+{
+    char tabla[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (int i = 0; i <= 16; ++i)
+        if (a == tabla[i]) return i;
+    return 0;
+}
+ 
+char intToChar(int a) {
+    char tabla[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    return tabla[a];
+}
+ 
+void convertirBase(char v[], i64 a, int b)
+{
+    int i = 0;
+    while (a >= b)
+    {
+        v[i] = intToChar(a%b);
+        a /= b;
+        ++i;
+    }
+    v[i] = intToChar(a);
+    v[i+1] = '\0';
+    invertirCadena(v);
+}
+ 
+void cambiarbase(char v[], float b, int o)
+{
+    i64 temp = 0;
+    int n = strlen(v);
+    if (b == o) return;
+    if (b != 10)
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            temp = temp + charToInt(v[i]) * pow(b, n-i-1);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            temp = temp*10 + charToInt(v[i]);
+        }
+    }
+    memset(v, 0, sizeof(v));
+    convertirBase(v, temp, o);
+}
+ 
+void numeroliteral(char v[], int n)
+{
+    int aux = n / 1000;
+    n %= 1000;
+    switch (aux)
+    {
+        case 1: strcat(v, "mil "); break;
+        case 2: strcat(v, "dos mil "); break;
+        case 3: strcat(v, "tres mil "); break;
+        case 4: strcat(v, "cuatro mil "); break;
+        case 5: strcat(v, "cinco mil "); break;
+        case 6: strcat(v, "seis mil "); break;
+        case 7: strcat(v, "siete mil "); break;
+        case 8: strcat(v, "ocho mil "); break;
+        case 9: strcat(v, "nueve mil "); break;
+        default: break;
+    }
+    aux = n / 100;
+    n %= 100;
+    switch (aux)
+    {
+        case 1: if (n == 0) strcat(v, "cien ");
+                else strcat(v, "cientos ");
+                break;
+        case 2: strcat(v, "doscientos "); break;
+        case 3: strcat(v, "trescientos "); break;
+        case 4: strcat(v, "cuatrocientos "); break;
+        case 5: strcat(v, "quinientos "); break;
+        case 6: strcat(v, "seiscientos "); break;
+        case 7: strcat(v, "sietecientos "); break;
+        case 8: strcat(v, "ochocientos "); break;
+        case 9: strcat(v, "nuevecientos "); break;
+        default: break;
+    }
+    aux = n / 10;
+    n %= 10;
+    switch (aux)
+    {
+        case 1: if (n > 5) strcat(v, "diez ");
+                else
+                {
+                    switch (n)
+                    {
+                        case 1: strcat(v, "once"); break;
+                        case 2: strcat(v, "doce"); break;
+                        case 3: strcat(v, "trece"); break;
+                        case 4: strcat(v, "catorce"); break;
+                        case 5: strcat(v, "quince"); break;
+                        default: break;
+                    }
+                    n = 0;
+                }
+            break;
+        case 2: strcat(v, "veinte "); break;
+        case 3: strcat(v, "treinta "); break;
+        case 4: strcat(v, "cuarenta "); break;
+        case 5: strcat(v, "cincuenta "); break;
+        case 6: strcat(v, "sesenta "); break;
+        case 7: strcat(v, "setenta "); break;
+        case 8: strcat(v, "ochenta "); break;
+        case 9: strcat(v, "noventa "); break;
+    default: break;
+    }
+    aux = n;
+    switch (aux)
+    {
+        case 1: strcat(v, "y uno "); break;
+        case 2: strcat(v, "y dos "); break;
+        case 3: strcat(v, "y tres "); break;
+        case 4: strcat(v, "y cuatro "); break;
+        case 5: strcat(v, "y cinco "); break;
+        case 6: strcat(v, "y seis "); break;
+        case 7: strcat(v, "y siete "); break;
+        case 8: strcat(v, "y ocho "); break;
+        case 9: strcat(v, "y nueve "); break;
+        default: break;
+    }
+}
+ 
+int valordelmensaje(char v[])
+{
+    int costo = 0;
+    for (int i = 0; i < strlen(v); ++i)
+    {
+        if ((v[i] >= 65 && v[i] <= 89) || (v[i] >= 97 && v[i] <= 122)) costo += 10;
+        else if (v[i] >= 48 && v[i] <= 57) costo += 20;
+        else if (v[i] != ' ') costo += 30;
+    }
+    return costo;
+}
+ 
