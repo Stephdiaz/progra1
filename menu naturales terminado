@@ -1,0 +1,262 @@
+// NATURAL
+//
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "math.h"
+#include <stdio.h>
+#include <map>
+#include <ctime>
+#include <cstring>
+#include <cstdio>
+#define max 1000
+typedef unsigned long long i64;
+int digitos (i64 a) { return i64( log10( float(a) ) ) + 1; }
+int concatenarnumeros(int a, int b);
+int depurarepetidos(int a);
+int invertir(int a);
+int eliminarmayor(int a);
+bool capicua(int a);
+float salario (float a, float b);
+void salarios(float a);
+int sumadigitos (int a);
+void automorficos();
+int eliminarRepetido(int a);
+int invertir1(int a);
+int eliminardigitomayor(int a);
+int insertarnumero(int a, int dig);
+void azar();
+using namespace std;
+void main ()
+{int op,a,b,r;
+bool R;
+	do{
+		cout<<".............MENU................"<<endl;
+		cout<<"1.concatenar nueros"<<endl;
+		cout<<"2.eliminar numero repetido"<<endl;
+		cout<<"3.invertir su numero"<<endl;
+		cout<<"4.eliminar digito mayor"<<endl;
+		cout<<"5.Insertar numero"<<endl;
+		cout<<"6.capicua"<<endl;
+		cout<<"7.salarios"<<endl;
+		cout<<"8.adivinar"<<endl;
+		cout<<"9.suma de digitos"<<endl;
+		cout<<"10.automorfico"<<endl;
+		cout<<"Salir"<<endl;
+		cin>>op;
+		}while ((op<0)&&(op>11));
+	switch (op)
+	{
+	case 1:	{cout<<"Introducir primer numero"<<endl;
+			cin>>a;
+			cout<<"Introducir segundo numero"<<endl;
+			cin>>b;
+			r=concatenarnumeros(a,b);
+			cout<<"La respuesta es "<<r;
+			}break;
+	case 2:	{cout << "Ingrese un numero natural" << endl;
+            cin >> a;
+            cout << "Los numeros sin repetir son: " << eliminarRepetido(a) << endl;
+			break;}
+	case 3:	{cout<<"Introducir numero"<<endl;
+			cin>>a;
+			r=invertir(a);
+			cout<<"La respuesta es "<<r;
+			}break;
+	case 4:	{cout << "Ingrese un numero natural" << endl;
+            cin >> a;
+            cout << "El numero sin el mayor digito es: " << eliminardigitomayor(a) << endl;
+			} break;
+	case 5:	{cout << "Ingrese un numero natural" << endl;
+            cin >> a;
+			cout << "Ingrese el numero a insertar" << endl;
+            cin >> b;
+			cout << "El resultado de insertar el numero es: " << insertarnumero(a, b) << endl;}
+                break;
+	case 6:	{cout<<"Introducir numero"<<endl;
+			cin>>a;
+			R=capicua(a);
+			if (R==true)
+			cout<<"true"<<endl;
+			else
+			cout<<"false"<<endl;
+			}break;
+	case 7:	{cout<<"Introducir numero de trabajadores"<<endl;
+			cin>>a;
+			salarios(a);
+			}break;
+	case 8:{azar();
+			break;}
+	case 9:	{cout<<"numero"<<endl;
+			cin>>a;
+			r=sumadigitos(a);
+			cout<<"La respuesta es "<<r;
+			}break;
+	case 10:{ automorficos();
+			}break;
+}
+	getch();
+}
+
+int concatenarnumeros(int a, int b)
+{
+	int aux,h;
+	float c=0;
+	
+	aux=a;
+		while (aux>0){
+		aux=aux/10;
+		c++;
+		}
+				
+
+		h=a*(pow(10,c))+b;
+
+		return (h);
+}
+int invertir1(int a)
+{
+    int r = 0;
+    while (a)
+    {
+        r = r*10 + a%10;
+        a /= 10;
+    }
+    return r;
+}
+int eliminarRepetido(int a)
+{
+    int r = 0, aux = a;
+    map<int, int> rep;
+    while (aux)
+    {
+        ++rep[aux%10];
+        aux /= 10;
+    }
+    aux = a;
+    while (aux)
+    {
+        if (rep[aux%10] == 1) r = r*10 +  aux%10;
+        aux /= 10;
+    }
+    return invertir1(r);
+}
+
+int invertir(int a)
+	{
+		int j,z=0;
+		while (a>0)
+		{
+			j=a%10;
+			z=(z*10)+j;
+			a=a/10;
+		}
+		return z;
+	}
+int eliminardigitomayor(int a)
+{
+    int may = a%10, aux = a/10, res = 0;
+    while (aux)
+    {
+        if (aux%10 > may) may = aux%10;
+        aux /= 10;
+    }
+    aux = a;
+    for (int i = 0; i < digitos(a); ++i)
+    {
+        if (aux%10 != may) res = res*10 + aux%10;
+        aux /= 10;
+    }
+    return invertir(res);
+}
+bool capicua(int a)
+{ bool k=true;
+	if (a==invertir(a))
+	{return k;}
+	else
+		k=false;
+	return k;
+}
+void salarios(float a)
+{
+	
+	float b,c=20,tt;
+	
+	for(int i=1;i<=a;i++)
+	{
+	cout<<"ingrese horas trbajadas"<<endl;
+	cin>>b;
+	tt=salario(b,c);
+		cout<<"el sueldo es "<<endl;
+		cout<<tt<<endl;
+	}
+		
+}
+float salario(float a, float b)
+{
+	float st;
+		st=a*b;
+	return st;
+}
+int sumadigitos (int a)
+{ int h=0;
+	while (a>0)
+		
+	{	h=a%10+h;
+	a=a/10;}
+	return h;
+}
+void automorficos ()
+{	int r=1,aux,h=1,c=0;
+	aux=h;
+	float a=2;
+	for (h=1;h<=25;h++){
+	if (h<10){
+		c=10;
+		r= pow(h,a);
+	if (r%c==h){
+		cout<<r<<" ";}}
+	else if	(h>9){
+			c=100;
+		r= pow(h,a);
+	if (r%c==h){
+		cout<<r<<" ";
+		}
+		}
+	}
+}
+int insertarnumero(int a, int dig)
+{
+    if (a%10 < dig) return a*10 + dig;
+    if (invertir(a)%10 > dig) return invertir( invertir(a)*10 + dig );
+    int partA = a/10, partB = a%10;
+    while (partA)
+    {
+        if (dig > partA%10 && partB%10 > dig)
+        {
+            partB = invertir(partB);
+            return (partA*10 + dig) * pow(10.0, digitos(partB)) + partB;
+        }
+        else
+        {
+            partB = partB*10 + partA%10;
+            partA /= 10;
+        }
+    }
+}
+void azar()
+{
+    srand((unsigned)time(NULL));
+    int aleatorio = rand()%100 + 1, a;
+    cout << "Adivine, ingrese un numero natural entre el 1 y el 100" << endl;
+    do
+    {
+        cin >> a;
+        if (a > aleatorio) cout << "Muy grande" << endl;
+        else if (a < aleatorio) cout << "Muy pequeno" << endl;
+        else cout << "Correcto!" << endl;
+        system("PAUSE");
+        system("CLS");
+    } while (a != aleatorio);
+ 
+}
