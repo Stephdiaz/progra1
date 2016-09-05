@@ -1,8 +1,14 @@
-
 #include "stdafx.h"
 #include <iostream>
 #include "conio.h"
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <ctime>
+#include <cstring>
+#include <cstdio>
 #define max 50
+int fib[max];
 void cargar(int a[],int num);
 void frecuencia(int a[],int num);
 void eliminar(int a[],int num);
@@ -10,8 +16,18 @@ void secuencia(int a[],int num);
 void sumarvectores(int a[],int b[],int num);
 void recorrerarriba(int a[],int num);
 void recorrerabajo(int a[],int num);
-void unionvec(int a[],int b[],int c[],int na, int nb, int nc);
 bool verificar(int c[], int num,int elem);
+void insertarSort(int a[], int num);
+void mostrar(int a[], int num);
+void unionvec(int a[], int b[], int c[], int na, int nb, int &nc);
+bool existe(int a[], int num, int obj);
+void fvector(int v[], int num);
+void invertirv(int a[], int num);
+int calcularFib(int num);
+int invertir (int num);
+int enesimoPrimo(int num);
+bool esPrimo(int num);
+void operaciones(int a[], int b[], int num);
 using namespace std;
 void main ()
 { int op,num,a[max],r,b[max],na,nb,c[max],nc;
@@ -25,6 +41,8 @@ void main ()
 		cout<<"6.recorrer hacia arriba"<<endl;
 		cout<<"7.recorrer hacia abajo"<<endl;
 		cout<<"8.union de vectores"<<endl;
+		cout<<"9.completar vector"<<endl;
+		cout<<"10.conjunto de operacione"<<endl;
 		cout<<"11.salir"<<endl;
 		cin>>op;
 	}while ((op<=0)||(op>11));
@@ -34,6 +52,14 @@ case 1: {cout<<"ingrese cantidad de digitos"<<endl;
 		cout<<"Cargar vector"<<endl;
 		cargar(a,num);
 		frecuencia(a,num);}break;
+  case 2:{cout << "Ingrese la cantidad de elementos en el vector" << endl;
+          cin >> num;
+		cargar(a, num);
+		 insertarSort(a,num);
+		cout << "El vector ordenado es: ";
+		mostrar(a, num);}
+		cout << endl;
+                break;
 case 3: {cout<<"ingrese cantidad de digitos"<<endl;
 		cin>>num;
 		cout<<"Cargar vector"<<endl;
@@ -69,7 +95,24 @@ case 8: {cout<<"ingrese cantidad de digitos del primer vector"<<endl;
 		cin>>nb;
 		cout<<"Cargar segundo vector"<<endl;
 		cargar(b,nb);
-		unionvec(a,b,c,na,nb,nc);}break;
+		unionvec(a,b,c,na,nb,nc);
+		cout << "El resultado de la union es: " << endl;
+                mostrar(c, nc);
+                cout << endl;}break;
+case 9:{cout << "Ingrese la cantidad de elementos del vector" << endl;
+        cin >> num;
+        fvector(a, num);
+        cout << "El vector rellenado es: "<< endl;
+		mostrar(a, num);
+		cout << endl;}
+                break;
+case 10:{cout << "Ingrese la cantidad de elementos del vector" << endl;
+		cin >> num;
+         cargar(a, num);
+         operaciones(a, b, num);
+		 cout << "El nuevo vector es: " << endl;
+		 mostrar(a, num);}
+         break;
 }getch();
 }
 
@@ -160,19 +203,7 @@ case 8: {cout<<"ingrese cantidad de digitos del primer vector"<<endl;
 			cout<<b[i]<<" ";
 		}
 	}
-	/*void uniondevectores(int a[],int b[],int numa,int numb)
-	{
-		int i,c[max],j=0;
-		for (i=0;i<numa;i++)
-		{	c[i]=a[i]; }
-		for (i=numa;i<numa+numb;i++)
-		{	c[i]=b[j]; 
-		j++;}
-		for (i=0;i<numa+numb;i++){
-			cout<<c[i]<<" ";
-		}
-	}
-	*/
+
 	bool verificar(int c[], int num,int elem)
 	{
 		int i;
@@ -183,13 +214,127 @@ case 8: {cout<<"ingrese cantidad de digitos del primer vector"<<endl;
 	} return k;
 	}
 
-void unionvec(int a[],int b[],int c[],int na, int nb, int nc)
+void unionvec(int a[], int b[], int c[], int tamA, int tamB, int &tamC)
 {
-	int i;
-	nc=0;
-	for(i=0;i<na<i++;){
-		if(verificar(c,nc,a[i])==true)
-			c[nc]=a[i];
-		nc++;
-	}
+    tamC = 0;
+    for (int i = 0; i < tamA; ++i)
+    {
+        if (!existe(c, tamC, a[i]))
+        {
+            c[tamC] = a[i];
+            ++tamC;
+        }
+    }
+ 
+    for (int i = 0; i < tamB; ++i)
+    {
+        if (!existe(c, tamC, b[i]))
+        {
+            c[tamC] = b[i];
+            ++tamC;
+        }
+    }
+ 
+}
+void insertarSort(int a[], int num)
+{
+    int j, temp;
+    for (int i = 0; i < num; i++)
+    {
+        j = i;
+        while (j > 0 && a[j] < a[j-1])
+        {
+            temp = a[j];
+            a[j] = a[j-1];
+            a[j-1] = temp;
+            j--;
+        }
+    }
+}
+void mostrar(int a[], int num)
+{
+    for (int i = 0; i < num; ++i) cout << a[i] << " ";
+    cout << endl;
+}
+bool existe(int a[], int num, int obj)
+{
+    for (int i = 0; i < num; ++i)
+    {
+        if (a[i] == obj) return true;
+    }
+    return false;
+
+}
+void invertirv(int a[], int num)
+{
+    for (int i = 0; i < num/2; ++i)
+    {
+        swap(a[i], a[num-i-1]);
+    }
+}
+void fvector(int v[], int num)
+{
+	int a[max], tamA = num/2, b[max], tamB = num - tamA;
+    for (int i = 0; i < tamA; ++i)
+    {
+        a[i] = calcularFib(i);
+    }
+    for (int i = 0; i < tamB; ++i)
+    {
+        b[i] = enesimoPrimo(i+1);
+    }
+    invertirv(a, tamA);
+    invertirv(b, tamB);
+    unionvec(b, a,v, tamA, tamB, num);
+ 
+}
+ 
+void operaciones(int a[], int b[], int num)
+{
+    int aux;
+    for (int i = 0; i < num; ++i)
+    {
+        aux = a[i];
+        b[i] = 0;
+        while (aux)
+        {
+            if (aux%10 == 1 || aux%10 == 3 || aux%10 == 5) b[i] = b[i]*10 + aux%10;
+            aux /= 10;
+        }
+        b[i] = invertir(b[i]);
+    }
+}
+int calcularFib(int num)
+{
+    if (num == 0 || num == 1) return 1;
+    if (fib[num] != -1) return fib[num];
+    fib[num] = calcularFib(num-1) + calcularFib(num-2);
+    return fib[num];
+}
+int enesimoPrimo(int num)
+{
+    int c = 0, i;
+    for (i = 1; c != num; ++i)
+    {
+        if (esPrimo(i)) ++c;
+    }
+    return i - 1;
+}
+bool esPrimo(int num)
+{
+    if (num == 0) return false;
+    if (num == 1) return true;
+    for (int i = 2; i < num; ++i)
+        if (num%i == 0) return false;
+    return true;
+}
+int invertir (int num)
+{
+    int res = 0;
+    while (num)
+    {
+        res = res*10 + num%10;
+        num /= 10;
+    }
+    return res;
 }
