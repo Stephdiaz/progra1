@@ -1,0 +1,132 @@
+#include <iostream>
+#include "conio.h"
+struct datos{
+	int a[30],n;
+};
+void cargar(datos A[],int tam);
+void mostrar(datos A[],int tam);
+void cargarmatriz(datos A[],int tam);
+void burbuja (int a[], int tam);
+void acomodarsubvectores (datos A[],int tam);
+bool verificarprimo(int n);
+void ordenarprimos(datos A[],int tam) ;
+using namespace std;
+void main (){
+int tam;
+datos A[30];
+cout<<"ingrese tamaño del vector"<<endl;
+cin>>tam;
+
+ordenarprimos (A,tam);
+mostrar(A,tam);
+cin>>tam;
+}
+
+
+
+void cargar(datos A[],int tam)
+{ int i,j;
+	for (i=0;i<tam;i++)
+	{ cout<<"Crgue su subvector "<<i+1<<endl;
+		for(j=0;j<tam;j++)
+		{cin>>A[i].a[j];}
+	}system ("cls");
+}
+
+void mostrar(datos A[],int tam)
+{	int i,j;
+	cout<<"Mostrando sus subvectores"<<endl;
+	for (i=0;i<tam;i++){
+	cout<<"su subvector "<<i+1<<endl;
+	for(j=0;j<tam;j++)
+	{	cout<<A[i].a[j]<<" ";
+	
+	}cout<<endl;
+	}
+}
+void cargarmatriz(datos A[],int tam)   //Esta funcion cargara en forma de matriz, donde la diagonal son numeros naturales, y el triangulo superior e inferior son impares
+{	int i,j,aux=1,auxn=1,p=1;
+	for (i=0;i<tam;i++)
+	{ 
+		for(j=0;j<tam;j++)
+			{
+				if(i==j)
+					{A[i].a[j]=p;
+					p++;}
+				else if(i>j)
+					{A[i].a[j]=aux;
+					aux=aux+2;
+					}
+				else if (j>i)
+				{A[i].a[j]=auxn;
+					auxn=auxn+2;
+					}
+		}
+	}
+}
+
+void acomodarsubvectores (datos A[],int tam)   //esta funcion acomoda cada subvector de manera ascendente.
+{	int i,j;
+ cargar(A,tam);	
+for (i=0;i<tam;i++)
+	{ burbuja (A[i].a ,tam);
+	}
+}
+
+
+
+
+void burbuja (int a[], int tam)
+{
+for (int i=0;i<tam;i++)
+for (int j=i+1;j<tam;j++)
+if (a[i]>a[j])
+{ int temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+}
+}
+bool verificarprimo(int n)
+{	
+	if (n==0){
+	return false;}
+
+	for (int i=2;i<n;i++){
+	if(n%i==0)
+	{
+		return false;
+	}
+	else
+		return true;
+}
+}
+
+
+
+void ordenarprimos(datos A[],int tam)   //esta funcion ordena de manera ascendente todo los primos, los que no son primos, conservan su lugar.
+{	int i,j,b[30],aux1=0,aux2=0;
+cargar(A,tam);
+for (i=0;i<tam;i++){
+	
+	for(j=0;j<tam;j++)
+			{
+				if(verificarprimo(A[i].a[j])==true)
+				{
+					b[aux1]=A[i].a[j];
+					aux1++;
+				}
+	}
+}burbuja(b,aux1);
+
+for (i=0;i<tam;i++){
+
+	for(j=0;j<tam;j++)
+			{
+				if(verificarprimo(A[i].a[j])==true)
+				{
+					A[i].a[j]=b[aux2];
+					aux2++;
+				}
+	}
+}
+}
