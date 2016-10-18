@@ -1,0 +1,109 @@
+////pantalla (20x80)//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+
+#define fil 20
+#define col 80
+
+char pantalla[fil][col];
+void limpiarpantalla(){
+	for(int i=0;i<fil;i++){
+		for(int j=0;j<col;j++){
+			pantalla[i][j] = ' ';
+		}
+	}
+}
+
+void mostrar(){
+	for(int i=0;i<fil;i++){
+		for(int j=0;j<col;j++){
+			cout<<pantalla[i][j];
+		}cout<<endl;
+	}
+}
+
+void dibujarhorizontal(int x1, int y1, int x2, int y2)
+{ 
+	for(int i=y1;i<y2;i++){
+	pantalla[x1][i]=196;
+	}
+
+}
+void dibujarvertical(int x1, int y1, int x2, int y2)
+{ 
+	for(int i=x1;i<x2;i++){
+	pantalla[i][y1]= 179;
+	}
+
+}
+
+void dibujar()
+{ int x1,x2,y1,y2;
+	cout<<"Introducir primera coordeada "<<"x1"<<endl;
+	cin>>x1;
+	cout<<"y1"<<endl;
+	cin>>y1;
+	cout<<"Introducir 2da coordeada "<<"x2"<<endl;
+	cin>>x2;
+	cout<<"y2"<<endl;
+	cin>>y2;
+	dibujarhorizontal(x1,y1,x1, y2);
+	dibujarhorizontal(x2,y1,x2, y2);
+	dibujarvertical(x1,y1, x2, y1);
+	dibujarvertical(x1,y2, x2, y2);
+	pantalla[x1][y1] = 218;
+	pantalla[x1][y2] = 191;
+	pantalla[x2][y1] = 192;
+	pantalla[x2][y2] = 217;
+}
+void dibujarpredeterminado(int x1, int y1, int x2, int y2)
+{ 
+	dibujarhorizontal(x1,y1,x1, y2);
+	dibujarhorizontal(x2,y1,x2, y2);
+	dibujarvertical(x1,y1, x2, y1);
+	dibujarvertical(x1,y2, x2, y2);
+	pantalla[x1][y1] = 218;
+	pantalla[x1][y2] = 191;
+	pantalla[x2][y1] = 192;
+	pantalla[x2][y2] = 217;
+}
+void dibujarhorizontalsombra(int x1, int y1, int x2, int y2)
+{ 
+	for(int i=y1;i<y2;i++){
+	pantalla[x1][i]=176;
+	}
+
+}
+void dibujarverticalsombra(int x1, int y1, int x2, int y2)
+{ 
+	for(int i=x1;i<x2;i++){
+	pantalla[i][y1]= 176;
+	}
+
+}
+
+void dibujar3d(int x1, int y1, int x2, int y2)
+{
+
+	dibujarpredeterminado(x1,y1,x2,y2);
+	dibujarhorizontalsombra(x1-1,y1+2,x2-1,y2+1);
+	dibujarverticalsombra(x1-1,y2+1,x2,y2+1);
+}
+
+void dibujarmuchoscuadrados(int x1, int y1, int x2, int y2)
+{
+	dibujarpredeterminado
+}
+	
+
+
+
+void main (){
+	limpiarpantalla();
+	dibujarmuchoscuadrados(2,4,18,36);
+	mostrar();
+getch();
+}
