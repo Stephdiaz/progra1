@@ -1,0 +1,68 @@
+////
+#include "stdafx.h"
+#include <iostream>
+#include <conio.h>
+#include <stdio.h>
+using namespace std;
+
+struct datos
+{
+	char nombre [30];
+	int edad;
+	char sexo;
+	char estado;
+};
+void adicionar()
+{
+	FILE *ptr; //declara variable que sera el puntero al archivo//
+	datos reg;
+	
+	do
+	{
+		cout<<"Introducir nombre"<<endl;
+		gets (reg.nombre);} while(strlen(reg.nombre)==0);
+	do
+	{	
+		cout<<"Introducir edad"<<endl;
+		cin>> (reg.edad); 
+		cin.ignore();}
+		while ((reg.edad<0)&&(reg.edad>99));
+	
+	do
+	{
+		cout<<"Introducir F para femenino, o M para masculino"<<endl;
+		cin>> (reg.sexo);
+		cin.ignore();} 
+	while((reg.sexo!='F')&&(reg.sexo!='M')&&(reg.sexo!='f')&&(reg.sexo!='m'));
+	reg.estado = 'A';
+		ptr=fopen("amigos.dat","ab");//abre el archivo para adicionar registro
+	/*ptr=fopen("amigos.dat","wb");		abre el arcivo para escritura, si no existe, se crea uno*/
+	fwrite(&reg, sizeof(reg),1,ptr);
+	fclose(ptr);
+}
+void listaamigos()
+{
+	FILE *ptr; //declara variable que sera el puntero al archivo//
+	datos reg;
+
+	ptr=fopen("amigos.dat","rb");//modo solo lectura
+if(ptr!=NULL){
+	fread(&reg, sizeof(reg),1,ptr);//lee el registro desde el archivo
+	while(feof(ptr)==false){
+	cout<<endl<<reg.nombre<<" "<<reg.edad<<" "<<reg.sexo;
+	fread(&reg, sizeof(reg),1,ptr);//lee el registro desde el archivo
+	
+	}
+	fclose(ptr);
+}
+else
+{cout <<"el archivo no existe"<<endl;
+				}
+}
+
+void main(){
+	
+	listaamigos();
+	getch();
+
+}
