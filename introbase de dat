@@ -1,4 +1,5 @@
-////
+// ju.cpp : Defines the entry point for the console application.
+//
 #include "stdafx.h"
 #include <iostream>
 #include <conio.h>
@@ -17,9 +18,8 @@ void adicionar()
 	FILE *ptr; //declara variable que sera el puntero al archivo//
 	datos reg;
 	
-	do
-	{
 		cout<<"Introducir nombre"<<endl;
+		do{
 		gets (reg.nombre);} while(strlen(reg.nombre)==0);
 	do
 	{	
@@ -44,25 +44,121 @@ void listaamigos()
 {
 	FILE *ptr; //declara variable que sera el puntero al archivo//
 	datos reg;
-
+cout<<"||=================================================||"<<endl;
+	cout<<"||*****************LISTA DE AMIGOS*****************||"<<endl;
+	cout<<"||"<<"nombre"<<"            "<<"edad"<<"      "<<"sexo"<<"                 ||"<<endl;
 	ptr=fopen("amigos.dat","rb");//modo solo lectura
 if(ptr!=NULL){
 	fread(&reg, sizeof(reg),1,ptr);//lee el registro desde el archivo
 	while(feof(ptr)==false){
-	cout<<endl<<reg.nombre<<" "<<reg.edad<<" "<<reg.sexo;
+	cout<<"||"<<reg.nombre<<"      "<<reg.edad<<"       "<<reg.sexo<<endl;
 	fread(&reg, sizeof(reg),1,ptr);//lee el registro desde el archivo
 	
 	}
+	cout<<"================================================="<<endl;
 	fclose(ptr);
 }
 else
 {cout <<"el archivo no existe"<<endl;
 				}
 }
-
-void main(){
+void promediodeedad()
+{
+	FILE *ptr; //declara variable que sera el puntero al archivo//
+	datos reg;
+	float r=0,b=0,a=0;
+	int c=0,M=0,F=0;
+	ptr=fopen("amigos.dat","rb");//modo solo lectura
+if(ptr!=NULL){
+	fread(&reg, sizeof(reg),1,ptr);//lee el registro desde el archivo
+	while(feof(ptr)==false){
+		if(reg.sexo=='f')
+		{a=reg.edad+a;
+		F++;}
+		else if(reg.sexo=='m')
+		{b=reg.edad+b;
+		M++;}
+	r=reg.edad+r;c++;
+	fread(&reg, sizeof(reg),1,ptr);//lee el registro desde el archivo
 	
-	listaamigos();
-	getch();
+	}
+	if(c>0){
+		cout<<"============================================================"<<endl;
+		cout<<"el promedio de las edades en general es ------->"<<r/c<<endl;
+		cout<<"Hay "<<c<<" personas"<<endl;}
+	if(F>0){
+		cout<<"============================================================"<<endl;
+		cout<<"el promedio de las edades de las mujeres es ------->"<<a/F<<endl;
+		cout<<"Hay "<<F<<" mujeres"<<endl;}
+	if(M>0){
+		cout<<"============================================================"<<endl;
+		cout<<"el promedio de las edades de los hombres es ------->"<<b/M<<endl;
+		cout<<"Hay "<<M<<" Hombres"<<endl;}
+		cout<<"============================================================"<<endl;
+		cout<<endl;
+		cout<<"			_________		"<<endl;
+		cout<<"			|			"<<endl;
+		cout<<"			|			"<<endl;
+		cout<<"			|			"<<endl;
+		cout<<"			|________		"<<endl;
+		cout<<"				|		"<<endl;
+		cout<<"				|		"<<endl;
+		cout<<"				|		"<<endl;
+		cout<<"			________|		"<<endl;
+	fclose(ptr);
+}
+else
+{cout <<"el archivo no existe"<<endl;
+				}
+}
+void buscar(int nrodereg){
+	FILE *ptr; //declara variable que sera el puntero al archivo//
+	datos reg;
+	ptr=fopen("amigos.dat","rb");//modo solo lectura
+if(ptr!=NULL){
+	fseek(ptr,(nrodereg-1)*sizeof(reg),SEEK_SET);
+	fread(&reg, sizeof(reg),1,ptr);//lee el registro desde el archivo
+	if(feof(ptr)==false){
+		if(reg.estado=='A'){
+			cout<<"=============================================="<<endl;
+		
+			cout<<"el registro que busca es------->> "<<nrodereg<<endl;
+			cout<<reg.nombre<<"      "<<reg.edad<<"       "<<reg.sexo<<endl;
+		
+			cout<<"===============================================";
 
+		}
+		else{ cout<<"el registro fue eliminado"<<endl;
+		}
+	}else{cout<<"el registro nu existe"<<endl;}
+}
+else{cout<<"el archivo no existe"<<endl;
+}
+}
+		
+void main(){
+	int op,nrodereg;
+	do{
+		cout<<"*******************MENU********************"<<endl;
+		cout<<"1.Adicionar registro"<<endl;
+		cout<<"2.Mostrar registros"<<endl;
+		cout<<"3.promedio de edad"<<endl;
+		cout<<"4.Introducir numero de registro"<<endl;
+		cout<<"5.salir"<<endl;
+		cout<<"seleccionar opcion"<<endl;
+		cin>>op;
+		system ("cls");
+		}while ((op<0)||(op>5
+			));
+		system ("cls");
+	switch(op){
+	case 1:	{adicionar();}break;
+	case 2:	{listaamigos();} break;
+	case 3:	{promediodeedad();} break;
+	case 4:	{cout<<"introducir numero de registro"<<endl;
+			cin>>nrodereg;
+			system ("cls");
+			buscar(nrodereg);} break;
+	}
+	getch();
 }
