@@ -1,0 +1,181 @@
+// 75.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <stdio.h>
+struct producto{
+	int idprod, precio,stock;
+	char estado;
+	char nombre[30];
+};
+struct venta{
+	int idventa, idproducto,cantidad,idcliente;
+	char estado;
+};
+using namespace std;
+void adicionarproducto (){
+FILE *ptr;
+producto reg;
+cout<<"introducir Idprod"<<endl;
+cin>>reg.idprod;
+system("cls");
+cout<<"introducir nombre"<<endl;
+do{
+gets(reg.nombre);
+
+} while(strlen(reg.nombre)==0);
+system("cls");
+cout<<"introducir precio"<<endl;
+cin>>reg.precio;
+system("cls");
+reg.stock=0;
+reg.estado='A';
+ptr=fopen("productos.dat","ab");
+fwrite (&reg, sizeof(reg),1,ptr);
+fclose(ptr);
+}
+/*int adicionarstcok(int ip)
+{FILE *ptr;
+	producto reg;
+	int r;
+	ptr=fopen("productos.dat","rb");
+	if(ptr!=NULL){
+		fread(&reg,sizeof(reg),1,ptr);
+		while(feof(ptr)==false){
+			if((reg.estado=='A')&&(reg.idprod==ip))
+			{
+				cout<<"introducir cantidad de stock"<<endl;
+				cin>>r;
+			}
+			fread(&reg,sizeof(reg),1,ptr);
+			}
+		fclose(ptr);
+	}
+	else{cout<<"\n\nEL ARCIVO NO EXISTE\n";
+	} return r;
+}*/
+void compra()
+{
+}
+
+void listadeproducto()
+{	FILE *ptr;
+	producto reg;
+	ptr=fopen("productos.dat","rb");
+	if(ptr!=NULL){
+		cout<<"****************************************";
+		cout<<"\n\LISTADO DE PRODUCTOS\n";
+		fread(&reg,sizeof(reg),1,ptr);
+		cout<<endl<<"Idprod"<<"\t"<<"nombre"<<"\t\t"<<"stock"<<"\t"<<"precio";
+		while(feof(ptr)==false){
+			if(reg.estado=='A')
+			{
+				
+				cout<<endl<<reg.idprod<<"\t"<<reg.nombre<<"\t"<<reg.stock<<"\t"<<reg.precio;
+			}
+			fread(&reg,sizeof(reg),1,ptr);
+		}
+		fclose(ptr);
+		cout<<endl<<"****************************************";
+	}
+	else{cout<<"\n\nEL ARCIVO NO EXISTE\n";
+	}
+}
+bool verificarsiexisteproducto(int ip)
+{FILE *ptr;
+	producto reg;
+	bool k=false;
+	ptr=fopen("productos.dat","rb");
+	if(ptr!=NULL){
+		
+		fread(&reg,sizeof(reg),1,ptr);
+			while(feof(ptr)==false){
+			if((reg.estado=='A')&&(reg.idprod==ip))
+			{
+				k=true;
+			}
+			fread(&reg,sizeof(reg),1,ptr);
+			}
+		fclose(ptr);
+	}
+	else{cout<<"\n\nEL ARCIVO NO EXISTE\n";
+	} return k;
+}
+
+bool verificarsihaystock(int cantidad)
+{FILE *ptr;
+	producto reg;
+	bool k=false;
+	ptr=fopen("productos.dat","rb");
+	if(ptr!=NULL){
+		
+		fread(&reg,sizeof(reg),1,ptr);
+			while(feof(ptr)==false){
+			if((reg.estado=='A')&&(reg.stock>=cantidad))
+			{
+				k=true;
+			}
+			fread(&reg,sizeof(reg),1,ptr);
+			}
+		fclose(ptr);
+	}
+	else{cout<<"\n\nEL ARCIVO NO EXISTE\n";
+	} return k;
+}
+
+void adicionarventa(){
+FILE *ptr;
+venta reg;
+cout<<endl<<"introducir Idventas"<<endl;
+cin>>reg.idventa;
+
+do{
+	cout<<"introducir idprod"<<endl;
+	cin>>reg.idproducto;
+}while(verificarsiexisteproducto(reg.idproducto)==false);
+
+do{	
+cout<<"introducir cantidad"<<endl;
+cin>>reg.cantidad;
+}while(verificarsihaystock(reg.idproducto)==false);
+cout<<"introducir idcliente"<<endl;
+cin>>reg.idcliente;
+
+reg.estado='A';
+ptr=fopen("producto.dat","ab");
+fwrite (&reg, sizeof(reg),1,ptr);
+fclose(ptr);
+}
+
+
+void main()
+{
+	int op;
+	do{
+		cout<<"**********MENU**********"<<endl;
+		cout<<"1.adicionar producto al inventario"<<endl;
+		cout<<"2.mostrar listado de inventario"<<endl;
+		cout<<"3.realizar compra"<<endl;
+		cout<<"4.realizar venta"<<endl;
+		cin>>op;
+		system("cls");
+	}while((op<0)||(op>3));
+	switch (op){
+	case 1:	
+		{
+			adicionarproducto();
+			} break;
+	case 2:
+		{	
+			listadeproducto();
+			}break;
+	case 4:
+		{	listadeproducto();
+			cout<<endl;
+			adicionarventa();
+		}break;
+	}
+	getch();
+}
